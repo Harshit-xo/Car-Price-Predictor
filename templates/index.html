@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Price Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <div class="card">
+    <h1>Car Price Predictor</h1>
+    <form id="predict-form">
+      <label for="company">Company</label>
+      <select id="company" name="company" required>
+        {% for c in companies %}
+          <option value="{{ c }}">{{ c }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="car_models">Car Model</label>
+      <select id="car_models" name="car_models" required>
+        {% for m in car_models %}
+          <option value="{{ m }}">{{ m }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="year">Year of Purchase</label>
+      <select id="year" name="year" required>
+        {% for y in years %}
+          <option value="{{ y }}">{{ y }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="fuel_type">Fuel Type</label>
+      <select id="fuel_type" name="fuel_type" required>
+        {% for f in fuel_types %}
+          <option value="{{ f }}">{{ f }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="kilo_driven">Kilometres Driven</label>
+      <input type="number" id="kilo_driven" name="kilo_driven" min="0" placeholder="e.g. 45000" required>
+
+      <button type="submit">Predict Price</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+   
+</body>
+</html>
