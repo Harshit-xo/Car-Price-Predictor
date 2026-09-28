@@ -5,24 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Car Price Predictor</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
   <div class="card">
     <h1>Car Price Predictor</h1>
     <form id="predict-form">
+
       <label for="company">Company</label>
       <select id="company" name="company" required>
+        <option value="" disabled selected>Select Company</option>
         {% for c in companies %}
           <option value="{{ c }}">{{ c }}</option>
         {% endfor %}
       </select>
 
       <label for="car_models">Car Model</label>
-      <select id="car_models" name="car_models" required>
-        {% for m in car_models %}
-          <option value="{{ m }}">{{ m }}</option>
-        {% endfor %}
+      <select id="car_models" name="car_models" required disabled>
+        <option value="" disabled selected>Select a company first</option>
       </select>
 
       <label for="year">Year of Purchase</label>
@@ -47,7 +46,10 @@
     <div id="result"></div>
   </div>
 
-   <script src="{{ url_for('static', filename='script.js') }}"></script>
-   
+  <!-- Must come BEFORE script.js so companyModels exists when it runs -->
+  <script>
+    const companyModels = {{ company_models | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
